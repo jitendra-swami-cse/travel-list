@@ -83,10 +83,14 @@ function PackingList({ items, onToggleItem }) {
     </div>
   );
 }
-function Stats() {
+function Stats({ items }) {
+  const packed = items.filter((item) => item.packed).length;
   return (
     <footer className="stats">
-      <em>💼 You have 1 items on your list, and you already packed 0 (0%)</em>
+      <em>
+        💼 You have {items.length} items on your list, and you already packed{" "}
+        {packed} ({(packed / items.length) * 100}%)
+      </em>
     </footer>
   );
 }
@@ -109,7 +113,7 @@ function App() {
       <Logo />
       <Form onAddItem={handleAddNewItem} />
       <PackingList items={items} onToggleItem={handleToggleItem} />
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 }
